@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kadiyala Srinivas, Sinter Plant Consultant</title>
+<meta name="description" content="Independent sinter plant consultancy. Eight focused programmes covering coke breeze granulometry, mixing, balling, charging, ignition, under grate suction and return sinter." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#11161a;
+    --slate:#33434e;
+    --mist:#e9ecee;
+    --paper:#ffffff;
+    --line:#c9d1d6;
+    --flame:#e4922b;
+    --ore:#7e3a2c;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation:none !important;transition:none !important}
+  }
+  body{
+    margin:0;
+    background:var(--mist);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- type ---------- */
+  h1,h2,h3,.disp{
+    font-family:"Barlow Condensed","IBM Plex Sans",sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    line-height:1.02;
+    margin:0;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--slate);
+  }
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:rgba(233,236,238,.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{display:flex;align-items:center;gap:20px;height:60px}
+  .brand{display:flex;flex-direction:column;line-height:1.05}
+  .brand b{font-family:"Barlow Condensed",sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.04em}
+  .brand span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--slate);text-transform:uppercase}
+  nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+  nav a{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;text-decoration:none;color:var(--slate);
+    padding:6px 0;border-bottom:1px solid transparent;
+  }
+  nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--flame)}
+  .navcta{
+    background:var(--ink);color:#fff !important;border:0 !important;
+    padding:9px 16px;border-radius:2px;
+  }
+  .navcta:hover{background:var(--ore)}
+  @media(max-width:760px){ nav a.hide-s{display:none} .bar{height:56px} }
+
+  /* ---------- hero ---------- */
+  .hero{padding:56px 0 28px}
+  .hero h1{font-size:clamp(38px,6.6vw,74px);max-width:16ch}
+  .hero .lede{
+    margin-top:18px;max-width:56ch;font-size:17px;color:var(--slate);
+  }
+  .rule{height:1px;background:var(--line);margin:34px 0 0}
+  .facts{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);margin-top:34px}
+  .fact{flex:1 1 190px;padding:16px 18px 16px 0;border-right:1px solid var(--line)}
+  .fact:last-child{border-right:0}
+  .fact b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:30px;line-height:1;letter-spacing:.01em}
+  .fact span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+
+  /* ---------- schematic ---------- */
+  .schematic{margin:30px 0 8px;background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:18px 18px 12px}
+  .schematic .cap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .schematic .cap p{margin:0;font-size:13.5px;color:var(--slate);max-width:62ch}
+  .svgscroll{overflow-x:auto;overflow-y:hidden}
+  svg.line{display:block;width:100%;min-width:820px;height:auto}
+  .node{cursor:pointer}
+  .node .plate{fill:var(--paper);stroke:var(--slate);stroke-width:1.2}
+  .node .code{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;fill:var(--ink);letter-spacing:.06em}
+  .node .stem{stroke:var(--slate);stroke-width:1;stroke-dasharray:2 3}
+  .node .dot{fill:var(--slate)}
+  .node:hover .plate,.node:focus-visible .plate{fill:var(--flame);stroke:var(--ink)}
+  .node:hover .dot,.node:focus-visible .dot{fill:var(--ore)}
+  .node:focus{outline:none}
+  .eq{fill:none;stroke:var(--slate);stroke-width:1.4}
+  .eqfill{fill:#dfe4e7;stroke:var(--slate);stroke-width:1.2}
+  .lbl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;fill:var(--slate);text-transform:uppercase}
+  .bed{fill:url(#front)}
+  @keyframes travel{0%{transform:translateX(0)}100%{transform:translateX(14px)}}
+
+  /* ---------- sections ---------- */
+  section{padding:64px 0}
+  .sechead{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin-bottom:8px}
+  .sechead h2{font-size:clamp(26px,3.6vw,40px)}
+  .sechead p{margin:0;max-width:52ch;color:var(--slate);font-size:15px}
+
+  .stage{margin-top:38px}
+  .stagebar{
+    display:flex;align-items:baseline;gap:14px;
+    border-top:2px solid var(--ink);padding-top:10px;margin-bottom:18px;
+  }
+  .stagebar h3{font-size:19px}
+  .stagebar em{font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:11px;letter-spacing:.14em;color:var(--slate);text-transform:uppercase;margin-left:auto}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:3px;
+    padding:20px 20px 18px;display:flex;flex-direction:column;gap:12px;
+    transition:border-color .18s ease, box-shadow .18s ease;
+  }
+  .card:target,.card.flash{border-color:var(--flame);box-shadow:0 0 0 3px rgba(228,146,43,.22)}
+  .card .top{display:flex;align-items:center;gap:12px}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.1em;
+    background:var(--ink);color:#fff;padding:5px 9px;border-radius:2px;
+  }
+  .card h4{
+    margin:0;font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;
+    font-size:20px;line-height:1.08;letter-spacing:.02em;
+  }
+  .card p{margin:0;font-size:14.5px;color:#2b3740}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+  .tag{
+    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid var(--line);color:var(--slate);padding:4px 8px;border-radius:2px;background:#f4f6f7;
+  }
+  .days{
+    display:flex;align-items:center;gap:8px;border-top:1px dashed var(--line);padding-top:10px;
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;color:var(--ore);text-transform:uppercase;
+  }
+
+  /* ---------- profile ---------- */
+  #profile{background:var(--ink);color:#e7ecef}
+  #profile .eyebrow,#profile .sechead p{color:#9fb0ba}
+  #profile h2{color:#fff}
+  .prof{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;margin-top:34px}
+  @media(max-width:860px){.prof{grid-template-columns:1fr;gap:34px}}
+  .prof p{font-size:15.5px;color:#c8d3d9;margin:0 0 14px}
+  .prof p strong{color:#fff;font-weight:600}
+  .roles{list-style:none;margin:22px 0 0;padding:0;border-left:1px solid #3a4a54}
+  .roles li{padding:0 0 18px 18px;position:relative}
+  .roles li::before{content:"";position:absolute;left:-4.5px;top:8px;width:8px;height:8px;background:var(--flame);border-radius:50%}
+  .roles b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:.03em;color:#fff}
+  .roles span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;color:#8fa2ad;text-transform:uppercase}
+  .roles em{display:block;font-style:normal;font-size:14px;color:#bccad2;margin-top:4px}
+
+  .comm{border-top:1px solid #3a4a54;margin-top:6px}
+  .comm .row{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:11px 0;border-bottom:1px solid #26323a;align-items:baseline}
+  .comm .yr{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--flame)}
+  .comm .what{font-size:14px;color:#d6dfe4}
+  .comm .cap2{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#8fa2ad;white-space:nowrap}
+  @media(max-width:520px){.comm .row{grid-template-columns:56px 1fr}.comm .cap2{grid-column:2;}}
+
+  /* ---------- contact ---------- */
+  #contact{background:var(--paper);border-top:1px solid var(--line)}
+  .cgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;margin-top:32px}
+  @media(max-width:860px){.cgrid{grid-template-columns:1fr;gap:30px}}
+  .cline{border-top:1px solid var(--line);padding:14px 0}
+  .cline span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+  .cline a,.cline b{font-family:"Barlow Condensed",sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.02em;text-decoration:none;font-weight:600}
+  .cline a:hover{color:var(--ore)}
+  /* Email line only: real lowercase address, serif, clearly a link */
+  .cline.email a{
+    font-family:"Times New Roman",Times,serif;
+    font-size:21px;font-weight:400;
+    text-transform:none;letter-spacing:0;
+    text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;
+    color:var(--ore);word-break:break-all;
+  }
+  .cline.email a:hover,.cline.email a:focus-visible{color:var(--ink);text-decoration-thickness:2px}
+  form{display:grid;gap:14px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.two{grid-template-columns:1fr}}
+  label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:6px}
+  input,select,textarea{
+    width:100%;font-family:"IBM Plex Sans",sans-serif;font-size:15px;color:var(--ink);
+    background:#f6f8f9;border:1px solid var(--line);border-radius:2px;padding:11px 12px;
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--flame);outline-offset:1px;background:#fff}
+  textarea{min-height:110px;resize:vertical}
+  button{
+    justify-self:start;font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;background:var(--ink);color:#fff;border:0;border-radius:2px;
+    padding:14px 24px;cursor:pointer;
+  }
+  button:hover{background:var(--ore)}
+  button:focus-visible{outline:2px solid var(--flame);outline-offset:2px}
+  .note{font-size:12.5px;color:var(--slate);margin:0}
+
+  footer{background:var(--ink);color:#8fa2ad;padding:26px 0;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+  footer a{color:#c8d3d9;text-decoration:none}
+  .skip{position:absolute;left:-9999px}
+  .skip:focus{left:24px;top:10px;background:#fff;padding:10px;z-index:99}
+</style>
+</head>
+<body>
+<a class="skip" href="#programmes">Skip to programmes</a>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand">
+      <b>Kadiyala Srinivas</b>
+      <span>Sinter Plant Consultant</span>
+    </div>
+    <nav>
+      <a href="#programmes">Programmes</a>
+      <a class="hide-s" href="#profile">Profile</a>
+      <a class="hide-s" href="#record">Commissioning</a>
+      <a class="navcta" href="#contact">Enquire</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<div class="wrap hero">
+  <p class="eyebrow">Independent consultancy / Sinter plants</p>
+  <h1>Eight problems on the strand. Eight programmes to fix them.</h1>
+  <p class="lede">
+    Short, on site studies of your sinter machine, run on your own operating data. Each programme
+    ends with written recommendations your team can act on, and most are complete inside two working weeks.
+  </p>
+
+  <div class="facts">
+    <div class="fact"><b>Since 1992</b><span>In iron and steel making</span></div>
+    <div class="fact"><b>8 plants</b><span>Erected and commissioned</span></div>
+    <div class="fact"><b>10.58 MTPA</b><span>Sinter capacity last led</span></div>
+    <div class="fact"><b>4 to 15 days</b><span>Typical programme length</span></div>
+  </div>
+
+  <!-- SCHEMATIC -->
+  <div class="schematic">
+    <div class="cap">
+      <p class="eyebrow">The strand, left to right</p>
+      <p>Every programme sits at a real point on the line. Select a code to jump to that programme.</p>
+    </div>
+    <div class="svgscroll">
+      <svg class="line" viewBox="0 0 1080 250" role="img" aria-label="Schematic of a sinter plant line showing where each consultancy programme applies">
+        <defs>
+          <linearGradient id="front" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#e4922b"/>
+            <stop offset="45%" stop-color="#c2643a"/>
+            <stop offset="100%" stop-color="#7e3a2c"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ground -->
+        <line x1="20" y1="205" x2="1060" y2="205" class="eq"/>
+
+        <!-- coke crusher -->
+        <g>
+          <rect x="34" y="150" width="66" height="42" rx="2" class="eqfill"/>
+          <path d="M44 160 l14 22 M58 160 l14 22 M72 160 l14 22" class="eq"/>
+          <text x="34" y="212" class="lbl">Coke crusher</text>
+        </g>
+
+        <!-- proportioning bins -->
+        <g>
+          <path d="M136 140 h58 l-13 34 h-32 z" class="eqfill"/>
+          <path d="M204 140 h58 l-13 34 h-32 z" class="eqfill"/>
+          <text x="136" y="212" class="lbl">Proportioning</text>
+        </g>
+
+        <!-- primary mixing drum -->
+        <g>
+          <rect x="286" y="150" width="74" height="34" rx="17" class="eqfill"/>
+          <path d="M300 150 l10 34 M320 150 l10 34 M340 150 l10 34" class="eq"/>
+          <text x="286" y="212" class="lbl">Primary mixer</text>
+        </g>
+
+        <!-- balling drum -->
+        <g>
+          <rect x="384" y="150" width="74" height="34" rx="17" class="eqfill"/>
+          <circle cx="404" cy="167" r="4" class="eq"/>
+          <circle cx="421" cy="167" r="5" class="eq"/>
+          <circle cx="440" cy="167" r="6" class="eq"/>
+          <text x="384" y="212" class="lbl">Balling drum</text>
+        </g>
+
+        <!-- raw mix bunker + segregation plate -->
+        <g>
+          <path d="M486 122 h74 l-16 42 h-42 z" class="eqfill"/>
+          <line x1="502" y1="164" x2="546" y2="182" class="eq"/>
+          <circle cx="556" cy="176" r="9" class="eq"/>
+          <text x="486" y="212" class="lbl">Bunker + segregation</text>
+        </g>
+
+        <!-- ignition hood -->
+        <g>
+          <rect x="600" y="140" width="86" height="30" rx="2" class="eqfill"/>
+          <path d="M614 170 l8 12 M634 170 l8 12 M654 170 l8 12 M672 170 l8 12" class="eq" stroke="#e4922b" stroke-width="2"/>
+          <text x="600" y="212" class="lbl">Ignition hood</text>
+        </g>
+
+        <!-- strand bed -->
+        <rect x="486" y="184" width="470" height="12" class="bed"/>
+        <line x1="486" y1="196" x2="956" y2="196" class="eq"/>
+
+        <!-- windboxes -->
+        <g>
+          <path d="M700 196 h44 l-10 26 h-24 z" class="eqfill"/>
+          <path d="M754 196 h44 l-10 26 h-24 z" class="eqfill"/>
+          <path d="M808 196 h44 l-10 26 h-24 z" class="eqfill"/>
+          <path d="M862 196 h44 l-10 26 h-24 z" class="eqfill"/>
+          <text x="700" y="238" class="lbl">Windboxes / suction main</text>
+        </g>
+
+        <!-- discharge + crusher -->
+        <g>
+          <path d="M956 184 l30 0 l0 26 l-30 0 z" class="eqfill"/>
+          <path d="M996 172 h44 v30 h-44 z" class="eqfill"/>
+          <path d="M1004 178 l10 18 M1018 178 l10 18" class="eq"/>
+          <text x="960" y="238" class="lbl">Discharge / screening</text>
+        </g>
+
+        <!-- markers -->
+        <g class="node" tabindex="0" role="link" data-target="CBG" aria-label="Programme CBG, coke breeze granulometry">
+          <line x1="67" y1="86" x2="67" y2="146" class="stem"/><circle cx="67" cy="150" r="3" class="dot"/>
+          <rect x="42" y="64" width="50" height="22" rx="2" class="plate"/>
+          <text x="52" y="79" class="code">CBG</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="SME" aria-label="Programme SME, mixing efficiency">
+          <line x1="199" y1="52" x2="199" y2="138" class="stem"/><circle cx="199" cy="140" r="3" class="dot"/>
+          <rect x="174" y="30" width="50" height="22" rx="2" class="plate"/>
+          <text x="184" y="45" class="code">SME</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="BAI" aria-label="Programme BAI, balling index">
+          <line x1="421" y1="86" x2="421" y2="146" class="stem"/><circle cx="421" cy="150" r="3" class="dot"/>
+          <rect x="396" y="64" width="50" height="22" rx="2" class="plate"/>
+          <text x="406" y="79" class="code">BAI</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="RZR" aria-label="Programme RZR, rim zone effect">
+          <line x1="510" y1="52" x2="510" y2="120" class="stem"/><circle cx="510" cy="122" r="3" class="dot"/>
+          <rect x="485" y="30" width="50" height="22" rx="2" class="plate"/>
+          <text x="493" y="45" class="code">RZR</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="SSM" aria-label="Programme SSM, segregation of sinter mix">
+          <line x1="556" y1="98" x2="556" y2="166" class="stem"/><circle cx="556" cy="168" r="3" class="dot"/>
+          <rect x="531" y="76" width="50" height="22" rx="2" class="plate"/>
+          <text x="539" y="91" class="code">SSM</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="IGH" aria-label="Programme IGH, ignition regime">
+          <line x1="643" y1="52" x2="643" y2="138" class="stem"/><circle cx="643" cy="140" r="3" class="dot"/>
+          <rect x="618" y="30" width="50" height="22" rx="2" class="plate"/>
+          <text x="628" y="45" class="code">IGH</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="IGS" aria-label="Programme IGS, under grate suction">
+          <line x1="798" y1="98" x2="798" y2="182" class="stem"/><circle cx="798" cy="184" r="3" class="dot"/>
+          <rect x="773" y="76" width="50" height="22" rx="2" class="plate"/>
+          <text x="783" y="91" class="code">IGS</text>
+        </g>
+        <g class="node" tabindex="0" role="link" data-target="RSG" aria-label="Programme RSG, return sinter generation">
+          <line x1="1018" y1="52" x2="1018" y2="168" class="stem"/><circle cx="1018" cy="170" r="3" class="dot"/>
+          <rect x="993" y="30" width="50" height="22" rx="2" class="plate"/>
+          <text x="1001" y="45" class="code">RSG</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMMES -->
+<section id="programmes">
+  <div class="wrap">
+    <div class="sechead">
+      <div>
+        <p class="eyebrow">Consultancy programmes</p>
+        <h2>What is studied, and what it moves</h2>
+      </div>
+      <p>Each programme is a defined study with a fixed scope and a written set of recommendations at the end. Programmes can be taken singly or combined into one visit.</p>
+    </div>
+
+    <!-- stage 1 -->
+    <div class="stage">
+      <div class="stagebar"><h3>Raw material preparation</h3><em>Crushing / proportioning / mixing / balling</em></div>
+      <div class="grid">
+
+        <article class="card" id="CBG">
+          <div class="top"><span class="chip">CBG</span><h4>Coke breeze granulometry</h4></div>
+          <p>A study of the entire coke crushing circuit. Recommendations follow from the measured results and are aimed at achieving optimum coke breeze granulometry.</p>
+          <div class="tags"><span class="tag">T.I</span><span class="tag">C/Breeze</span></div>
+          <div class="days">10 working days</div>
+        </article>
+
+        <article class="card" id="SME">
+          <div class="top"><span class="chip">SME</span><h4>Periodic and spatial mixing efficiency</h4></div>
+          <p>A study of the proportioning section together with the working regime of the primary mixing drum. Areas of concern are identified and measures to counter them are proposed.</p>
+          <div class="tags"><span class="tag">Mixing efficiency</span><span class="tag">Quality</span></div>
+          <div class="days">10 working days</div>
+        </article>
+
+        <article class="card" id="BAI">
+          <div class="top"><span class="chip">BAI</span><h4>Balling index through moisture control</h4></div>
+          <p>A study of the operating regime of the secondary mixing drum, along with the amount, place and method of water addition in the balling drum. Areas of concern are identified and corrective solutions provided.</p>
+          <div class="tags"><span class="tag">Balling index</span><span class="tag">Productivity</span></div>
+          <div class="days">10 working days</div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- stage 2 -->
+    <div class="stage">
+      <div class="stagebar"><h3>Charging the bed</h3><em>Raw mix bunker / segregation plate / roll feeder</em></div>
+      <div class="grid">
+
+        <article class="card" id="RZR">
+          <div class="top"><span class="chip">RZR</span><h4>Reduction in rim zone effect</h4></div>
+          <p>A study of the sinter mix profile in the raw mix bunker and of the horizontal bulk density distribution. Measures for reducing the rim zone effect are recommended from those findings.</p>
+          <div class="tags"><span class="tag">Rim zone effect</span><span class="tag">Return sinter</span></div>
+          <div class="days">15 working days</div>
+        </article>
+
+        <article class="card" id="SSM">
+          <div class="top"><span class="chip">SSM</span><h4>Segregation of sinter mix</h4></div>
+          <p>The vertical segregation index and the vertical bulk density distribution are estimated. The angle of the segregation plate and the RPM of the roll feeder are then optimised for a higher segregation index and a proper vertical bulk density distribution.</p>
+          <div class="tags"><span class="tag">Top layer yield</span><span class="tag">Return sinter</span><span class="tag">T.I</span></div>
+          <div class="days">10 working days</div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- stage 3 -->
+    <div class="stage">
+      <div class="stagebar"><h3>Ignition and suction</h3><em>Hood / windboxes / suction track</em></div>
+      <div class="grid">
+
+        <article class="card" id="IGH">
+          <div class="top"><span class="chip">IGH</span><h4>Optimisation of ignition regime</h4></div>
+          <p>The temperature regime across zones, the free oxygen potential in each zone and the suction profile under the hood are all measured. Measures and modifications are then proposed to reach the proper ignition regime.</p>
+          <div class="tags"><span class="tag">Productivity</span><span class="tag">Gaseous fuel</span></div>
+          <div class="days">10 working days</div>
+        </article>
+
+        <article class="card" id="IGS">
+          <div class="top"><span class="chip">IGS</span><h4>Under grate suction through aerodynamic mapping</h4></div>
+          <p>An aerodynamic evaluation maps the entire suction track. Leakages are identified and quantified so that the maintenance team can prioritise its activities and plug them.</p>
+          <div class="tags"><span class="tag">Under grate suction</span><span class="tag">Productivity</span></div>
+          <div class="days">Phase I, 4 working days. Phase II, 10 working days</div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- stage 4 -->
+    <div class="stage">
+      <div class="stagebar"><h3>Discharge and yield</h3><em>Pallet discharge / transport / screening</em></div>
+      <div class="grid">
+
+        <article class="card" id="RSG">
+          <div class="top"><span class="chip">RSG</span><h4>Reduction in return sinter generation</h4></div>
+          <p>Areas of weak sinter production on the pallet are identified, along with fines generation during transportation. Measures to counter weak sinter formation and to cut fines generation in transport are recommended.</p>
+          <div class="tags"><span class="tag">Return sinter</span></div>
+          <div class="days">10 working days</div>
+        </article>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="wrap">
+    <div class="sechead">
+      <div>
+        <p class="eyebrow">The consultant</p>
+        <h2>Kadiyala Srinivas</h2>
+      </div>
+      <p>Mechanical engineer by training, sinter plant man by trade. Thirty three years on the shop floor, in erection bays and in operations.</p>
+    </div>
+
+    <div class="prof">
+      <div>
+        <p>Kadiyala Srinivas has spent his career in sinter plant commissioning and in the wider running of integrated steel plants. His work has been in large industrial projects, with the focus on operational efficiency and quality control.</p>
+        <p>He most recently served as <strong>Head of Operations</strong> at JSW Steel, Ballari, leading the combined operations of Sinter Plants 2, 3 and 4 with a production capacity of 10.58 MTPA.</p>
+        <p>His strengths are project management, erection and commissioning, mechanical supervision, raw material handling systems, sinter plant operations, team leadership, and quality control and testing.</p>
+        <p>He holds a Diploma in Mechanical Engineering from Kolar, Karnataka, and has completed training in coke oven operating practice at Gaoping City, China, in iron ore characterisation at RDCIS Ranchi, and in ISO certification with DNV. He works in English, Hindi, Telugu and Kannada.</p>
+
+        <ul class="roles">
+          <li>
+            <b>JSW Steel, Ballari</b>
+            <span>Dec 2007 to April 2026</span>
+            <em>Head of Operations for Sinter Plants 2, 3 and 4. Earlier Plant Operations Incharge across SP 4, SP 2 and SP 3, and Section Incharge for SP 2 and SP 3.</em>
+          </li>
+          <li>
+            <b>Jayaswals NECo, Raipur</b>
+            <span>June 1996 to Dec 2007</span>
+            <em>Assistant Manager. Erection and commissioning of raw material handling systems, a 110 tonne wagon tippler, and a stacker cum reclaimer. Set a record for tipping an iron ore rake in 3 hours and 25 minutes.</em>
+          </li>
+          <li>
+            <b>Nandini Iron and Steel, Nidadavole</b>
+            <span>Sept 1992 to May 1996</span>
+            <em>Supervisor. Production of specialised castings and valves to customer specification, with quality testing of scrap, alloys and finished products.</em>
+          </li>
+        </ul>
+      </div>
+
+      <div id="record">
+        <p class="eyebrow" style="margin-bottom:14px">Plants erected and commissioned</p>
+        <div class="comm">
+          <div class="row"><span class="yr">2024</span><span class="what">JSW Steel, Ballari. Sinter Plant 5</span><span class="cap2">496 m² / 5.75 MTPA</span></div>
+          <div class="row"><span class="yr">2017</span><span class="what">JSPL, Angul. Sinter Plant 1</span><span class="cap2">496 m² / 5 MTPA</span></div>
+          <div class="row"><span class="yr">2011</span><span class="what">JSW Steel, Ballari. Sinter Plant 4</span><span class="cap2">224 m² / 2.53 MTPA</span></div>
+          <div class="row"><span class="yr">2011</span><span class="what">JSW Steel, Ballari. Sinter Plant 3</span><span class="cap2">496 m² / 5.75 MTPA</span></div>
+          <div class="row"><span class="yr">2008</span><span class="what">JSW Steel, Ballari. Sinter Plant 2</span><span class="cap2">200 m² / 2.3 MTPA</span></div>
+          <div class="row"><span class="yr">2005</span><span class="what">Jayaswal NECo. Non recovery coke oven plant</span><span class="cap2">2 batteries / 0.2 MTPA</span></div>
+          <div class="row"><span class="yr">2003</span><span class="what">Jayaswal NECo. Sinter Plant 1</span><span class="cap2">36 m² / 0.6 MTPA</span></div>
+          <div class="row"><span class="yr">2003</span><span class="what">Jayaswal NECo. RMHS for 650 m³ blast furnace</span><span class="cap2">Raw material handling</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sechead">
+      <div>
+        <p class="eyebrow">Enquiries</p>
+        <h2>Start with the problem, not the programme</h2>
+      </div>
+      <p>Describe what your machine is doing and the programme that fits will be clear soon enough. Enquiries are answered directly, not by an office.</p>
+    </div>
+
+    <div class="cgrid">
+      <div>
+        <div class="cline"><span>Telephone</span><a href="tel:+919480693065">+91 94806 93065</a></div>
+        <div class="cline email"><span>Email</span><a href="mailto:cnukadiyala25@gmail.com">cnukadiyala25@gmail.com</a></div>
+        <div class="cline"><span>Based in</span><b>Karnataka, India</b></div>
+        <div class="cline"><span>Travels to</span><b>Plant sites across India</b></div>
+      </div>
+
+      <div>
+        <form id="enq">
+          <div class="two">
+            <div><label for="nm">Your name</label><input id="nm" name="nm" type="text" required placeholder="Full name" /></div>
+            <div><label for="org">Plant or company</label><input id="org" name="org" type="text" placeholder="Plant and location" /></div>
+          </div>
+          <div class="two">
+            <div><label for="em">Email</label><input id="em" name="em" type="email" required placeholder="you@company.com" /></div>
+            <div><label for="ph">Phone</label><input id="ph" name="ph" type="tel" placeholder="Optional" /></div>
+          </div>
+          <div>
+            <label for="pg">Programme of interest</label>
+            <select id="pg" name="pg">
+              <option value="Not sure yet">Not sure yet, please advise</option>
+              <option value="CBG, Coke breeze granulometry">CBG, coke breeze granulometry</option>
+              <option value="SME, Mixing efficiency">SME, mixing efficiency</option>
+              <option value="BAI, Balling index">BAI, balling index</option>
+              <option value="RZR, Rim zone effect">RZR, rim zone effect</option>
+              <option value="SSM, Segregation of sinter mix">SSM, segregation of sinter mix</option>
+              <option value="IGH, Ignition regime">IGH, ignition regime</option>
+              <option value="IGS, Under grate suction">IGS, under grate suction</option>
+              <option value="RSG, Return sinter generation">RSG, return sinter generation</option>
+            </select>
+          </div>
+          <div>
+            <label for="msg">What is happening on the machine</label>
+            <textarea id="msg" name="msg" placeholder="Machine size, current productivity, the problem as you see it"></textarea>
+          </div>
+          <button type="button" id="send">Send enquiry</button>
+          <p class="note">The button opens your email application with the message ready to send.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Kadiyala Srinivas / Sinter plant consultancy</span>
+    <span><a href="mailto:cnukadiyala25@gmail.com">cnukadiyala25@gmail.com</a> / <a href="tel:+919480693065">+91 94806 93065</a></span>
+  </div>
+</footer>
+
+<script>
+  // Marker on the schematic jumps to the matching programme card
+  document.querySelectorAll('.node').forEach(function (n) {
+    function go() {
+      var id = n.getAttribute('data-target');
+      var card = document.getElementById(id);
+      if (!card) return;
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('flash');
+      setTimeout(function () { card.classList.remove('flash'); }, 2200);
+    }
+    n.addEventListener('click', go);
+    n.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
+  });
+
+  // Compose the enquiry as an email
+  document.getElementById('send').addEventListener('click', function () {
+    var v = function (id) { return document.getElementById(id).value.trim(); };
+    if (!v('nm') || !v('em')) {
+      alert('Please add your name and email so the enquiry can be answered.');
+      return;
+    }
+    var subject = 'Sinter plant enquiry, ' + (v('pg') || 'general') + ', ' + (v('org') || v('nm'));
+    var body =
+      'Name: ' + v('nm') + '\n' +
+      'Plant or company: ' + (v('org') || 'Not given') + '\n' +
+      'Email: ' + v('em') + '\n' +
+      'Phone: ' + (v('ph') || 'Not given') + '\n' +
+      'Programme of interest: ' + v('pg') + '\n\n' +
+      'Details:\n' + (v('msg') || 'Not given') + '\n';
+    window.location.href = 'mailto:cnukadiyala25@gmail.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+</script>
+</body>
+</html>
