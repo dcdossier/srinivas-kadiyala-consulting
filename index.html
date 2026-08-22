@@ -63,11 +63,11 @@
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  .bar{display:flex;align-items:center;gap:20px;height:60px}
-  .brand{display:flex;flex-direction:column;line-height:1.05}
-  .brand b{font-family:"Barlow Condensed",sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.04em}
-  .brand span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--slate);text-transform:uppercase}
-  nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+  .bar{display:flex;align-items:center;gap:20px;min-height:60px;padding:8px 0;flex-wrap:wrap;row-gap:8px}
+  .brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+  .brand b{font-family:"Barlow Condensed",sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+  .brand span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--slate);text-transform:uppercase;white-space:nowrap}
+  nav{margin-left:auto;display:flex;gap:22px;align-items:center;flex-wrap:wrap;row-gap:8px}
   nav a{
     font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
     text-transform:uppercase;text-decoration:none;color:var(--slate);
@@ -79,7 +79,17 @@
     padding:9px 16px;border-radius:2px;
   }
   .navcta:hover{background:var(--ore)}
-  @media(max-width:760px){ nav a.hide-s{display:none} .bar{height:56px} }
+  @media(max-width:760px){ nav a.hide-s{display:none} }
+  @media(max-width:520px){
+    .bar{padding:12px 0}
+    .brand{flex:1 1 100%}
+    .brand b{font-size:19px}
+    nav{flex:1 1 100%;margin-left:0;justify-content:flex-end;gap:16px}
+  }
+  @media(max-width:340px){
+    .brand b{font-size:17px}
+    .brand span{font-size:9px;letter-spacing:.12em}
+  }
 
   /* ---------- hero ---------- */
   .hero{padding:56px 0 28px}
@@ -116,6 +126,8 @@
 
   /* ---------- sections ---------- */
   section{padding:64px 0}
+  section,.card,#record{scroll-margin-top:76px}
+  @media(max-width:520px){ section,.card,#record{scroll-margin-top:120px} }
   .sechead{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin-bottom:8px}
   .sechead h2{font-size:clamp(26px,3.6vw,40px)}
   .sechead p{margin:0;max-width:52ch;color:var(--slate);font-size:15px}
